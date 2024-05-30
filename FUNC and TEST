@@ -1,0 +1,39 @@
+#include <vector>
+#include <algorithm>
+#include <gtest/gtest.h>
+
+using namespace std;
+vector<int> IncreaseElements(const vector<int>& input_vector, int n) {
+    vector<int> result_vector;
+    transform(input_vector.begin(), input_vector.end(), back_inserter(result_vector),
+              [n](int value { return value + n; });
+    return result_vector;
+}
+
+
+TEST(IncreaseElementsTest, PositiveNumbers) {
+    vector<int> input = {1, 2, 3};
+    int n = 5;
+    vector<int> expected = {6, 7, 8};
+    EXPECT_EQ(IncreaseElements(input, n), expected);
+}
+
+TEST(IncreaseElementsTest, NegativeNumbers) {
+    vector<int> input = {-1, -2, -3};
+    int n = 3;
+    vector<int> expected = {2, 1, 0};
+    EXPECT_EQ(IncreaseElements(input, n), expected);
+}
+
+TEST(IncreaseElementsTest, MixedNumbers) {
+    vector<int> input = {-1, 0, 1};
+    int n = 2;
+    vector<int> expected = {1, 2, 3};
+    EXPECT_EQ(IncreaseElements(input, n), expected);
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+
